@@ -1,0 +1,206 @@
+{
+  "name": "my-todo",
+  "displayName": "我的待办",
+  "description": "记录自己的待办事项，",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.45.0"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "build": "vsce package"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "my-todo.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "my-todo.saveFolder",
+        "title": "选择保存文件夹位置",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "my-todo.refreshProject",
+        "title": "刷新项目列表",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "my-todo.addProject",
+        "title": "新增项目",
+        "icon": "$(add)"
+      },
+      {
+        "command": "my-todo.delProject",
+        "title": "删除项目",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "my-todo.itemClick",
+        "title": "待办项目列表点击"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "my-todo.saveFolder": {
+          "type": "string",
+          "description": "保存数据的文件夹",
+          "default": ""
+        },
+        "my-todo.defaultOpenProject": {
+          "type": "string",
+          "description": "默认打开的Todo项目",
+          "default": ""
+        },
+        "my-todo.todoDetailPanelWidth": {
+          "type": "number",
+          "description": "待办详情面板宽度",
+          "default": 400,
+          "minimum": 400
+        },
+        "my-todo.openLastOpenTodo": {
+          "type": "boolean",
+          "description": "打开面板时展开上次打开的待办项的子面板",
+          "default": true
+        },
+        "my-todo.delayedSaveTime": {
+          "type": "number",
+          "description": "自动保存数据的延迟时间(毫秒)",
+          "default": 500
+        },
+        "my-todo.vscodeOpenFileType": {
+          "type": "array",
+          "description": "需要在vscode中打开的文件类型",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "txt",
+            "md",
+            "pdf",
+            "js",
+            "ts",
+            "py",
+            "java",
+            "cpp",
+            "c",
+            "cs",
+            "go",
+            "rb",
+            "php",
+            "rs",
+            "swift",
+            "kt",
+            "kts",
+            "html",
+            "css",
+            "scss",
+            "less",
+            "json",
+            "xml",
+            "yml",
+            "yaml",
+            "sh",
+            "bat",
+            "ps1",
+            "ini",
+            "toml",
+            "csv",
+            "tsv",
+            "sql",
+            "vue",
+            "jsx",
+            "tsx",
+            "dart",
+            "gradle",
+            "dockerfile",
+            "makefile",
+            "png",
+            "jpg",
+            "jpeg",
+            "gif",
+            "bmp",
+            "svg",
+            "webp",
+            "ico",
+            "tiff",
+            "tif",
+            "avif"
+          ]
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mySidebar",
+          "title": "我的待办",
+          "icon": "media/PajamasTodoDone.svg"
+        }
+      ]
+    },
+    "views": {
+      "mySidebar": [
+        {
+          "icon": "media/PajamasTodoDone.svg",
+          "type": "webview",
+          "id": "my-todo.sidebar",
+          "name": "待办项目"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "my-todo.saveFolder",
+          "when": "view == my-todo.sidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "my-todo.refreshProject",
+          "when": "view == my-todo.sidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "my-todo.addProject",
+          "when": "view == my-todo.sidebar",
+          "group": "navigation"
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "my-todo.todoEditor",
+        "displayName": "Todo Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.todo"
+          }
+        ]
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.45.0",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.13.0",
+    "typescript": "^5.6.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
