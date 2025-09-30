@@ -6,6 +6,12 @@
   "engines": {
     "vscode": "^1.45.0"
   },
+  "publisher": "VioSea",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VioSea-hub/my-todo"
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
